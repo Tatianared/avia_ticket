@@ -5,7 +5,7 @@ import ru.netology.domain.Ticket;
 public class TicketRepository {
     public Ticket[] tickets = new Ticket[0];
 
-    public Ticket[] getTickets(){
+    public Ticket[] getTickets() {
         return tickets;
     }
 

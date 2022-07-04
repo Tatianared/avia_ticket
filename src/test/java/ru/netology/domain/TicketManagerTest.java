@@ -5,9 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.repositiry.TicketRepository;
 
-import java.sql.Array;
-import java.util.Arrays;
-
 public class TicketManagerTest {
     private TicketRepository repository = new TicketRepository();
     private TicketManager manager = new TicketManager(repository);
@@ -26,20 +23,27 @@ public class TicketManagerTest {
 
 
     }
+
     @Test
-    public void shouldFindAllVko(){
-        Ticket[] expected = {ticket3, ticket2};
+    public void shouldFindAllVko() {
+        Ticket[] expected = {ticket2, ticket3};
         Ticket[] actual = manager.findAll("VKO", "KZN");
-        Arrays.sort(actual);
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldFindAllSvo(){
-        Ticket[] expected = {ticket4, ticket1};
+    public void shouldFindAllSvo() {
+        Ticket[] expected = {ticket1, ticket4};
         Ticket[] actual = manager.findAll("SVO", "KZN");
-        Arrays.sort(actual);
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void shouldSort() {
+        Ticket[] expected = {ticket3, ticket4, ticket1, ticket2};
+        Ticket[] actual = manager.sort(repository.getTickets());
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
 
 }

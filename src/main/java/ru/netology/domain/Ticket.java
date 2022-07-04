@@ -1,4 +1,5 @@
 package ru.netology.domain;
+
 public class Ticket implements Comparable<Ticket> {
     protected int id;
 
@@ -24,6 +25,10 @@ public class Ticket implements Comparable<Ticket> {
         this.time = time;
     }
 
+
+    public int getPrice() {
+        return price;
+    }
 
     @Override
     public int compareTo(Ticket o) {
