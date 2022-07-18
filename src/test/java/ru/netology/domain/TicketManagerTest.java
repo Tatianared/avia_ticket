@@ -26,24 +26,18 @@ public class TicketManagerTest {
 
     @Test
     public void shouldFindAllVko() {
-        Ticket[] expected = {ticket2, ticket3};
-        Ticket[] actual = manager.findAll("VKO", "KZN");
+        Ticket[] expected = {ticket3, ticket2};
+        Ticket[] actual = manager.search("VKO", "KZN");
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
     public void shouldFindAllSvo() {
-        Ticket[] expected = {ticket1, ticket4};
-        Ticket[] actual = manager.findAll("SVO", "KZN");
+        Ticket[] expected = {ticket4, ticket1};
+        Ticket[] actual = manager.search("SVO", "KZN");
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    @Test
-    public void shouldSort() {
-        Ticket[] expected = {ticket3, ticket4, ticket1, ticket2};
-        Ticket[] actual = manager.sort(repository.getTickets());
-        Assertions.assertArrayEquals(expected, actual);
-    }
 
 
 }

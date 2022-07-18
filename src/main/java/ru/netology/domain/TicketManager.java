@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public class TicketManager {
     protected TicketRepository repository;
+    private Ticket tickets;
 
 
     public TicketManager(TicketRepository repository) {
@@ -17,11 +18,10 @@ public class TicketManager {
     }
 
 
-    public Ticket[] findAll(String from, String to) {
+    public Ticket[] search(String from, String to) {
         Ticket[] result = new Ticket[0];
         for (Ticket ticket : repository.findAll()) {
-            if (ticket.getFrom() == from) {
-                if (ticket.getTo() == to) {
+            if (matches(ticket, from, to)) {
                     Ticket[] tmp = new Ticket[result.length + 1];
                     for (int i = 0; i < result.length; i++) {
                         tmp[i] = result[i];
@@ -30,24 +30,26 @@ public class TicketManager {
                     result = tmp;
                 }
             }
-        }
+
+        Arrays.sort(result);
         return result;
 
     }
 
+    public boolean matches(Ticket ticket, String from, String to) {
 
-    public Ticket[] sort(Ticket[] tickets) {
-        Ticket[] result = new Ticket[0];
-        Arrays.sort(tickets);
-        Ticket[] item = new Ticket[tickets.length];
-        for (int i = 0; i < tickets.length; i++) {
-            item[i] = tickets[i];
-            result = item;
+        if (ticket.getFrom().contains(from)) {
+            if (ticket.getTo().contains(to))
+                return true;
+        } else {
+            return false;
+
         }
-        return result;
+        return false;
     }
-
 }
+
+
 
 
 
