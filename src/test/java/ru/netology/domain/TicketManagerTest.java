@@ -13,6 +13,7 @@ public class TicketManagerTest {
     Ticket ticket2 = new Ticket(20, 2199, "VKO", "KZN", 1.35);
     Ticket ticket3 = new Ticket(30, 1199, "VKO", "KZN", 1.35);
     Ticket ticket4 = new Ticket(40, 1299, "SVO", "KZN", 1.35);
+    Ticket ticket5 = new Ticket(50, 3000, "DMV", "ADR", 1.35);
 
     @BeforeEach
     public void setUp() {
@@ -20,7 +21,7 @@ public class TicketManagerTest {
         manager.add(ticket2);
         manager.add(ticket3);
         manager.add(ticket4);
-
+        manager.add(ticket5);
 
     }
 
@@ -38,6 +39,17 @@ public class TicketManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void shouldFindAllDmv() {
+        Ticket[] expected = {ticket5};
+        Ticket[] actual = manager.search("DMV", "ADR");
+        Assertions.assertArrayEquals(expected, actual);
+    }
 
-
+    @Test
+    public void shouldFindAllNo() {
+        Ticket[] expected = {};
+        Ticket[] actual = manager.search("ABC", "DEF");
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
